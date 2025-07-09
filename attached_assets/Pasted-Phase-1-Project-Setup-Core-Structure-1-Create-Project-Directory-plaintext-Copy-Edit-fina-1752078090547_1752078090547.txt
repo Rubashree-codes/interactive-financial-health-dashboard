@@ -1,0 +1,213 @@
+Phase 1: Project Setup & Core Structure
+1️⃣ Create Project Directory
+
+plaintext
+Copy
+Edit
+financial_dashboard/
+2️⃣ Set Up Virtual Environment
+
+bash
+Copy
+Edit
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
+3️⃣ Install Required Packages
+Create a requirements.txt with:
+
+scss
+Copy
+Edit
+Flask
+Pandas
+scikit-learn
+Chart.js (via CDN in HTML)
+ReportLab
+Flask-Login
+Flask-SQLAlchemy
+Flask-Mail (optional for insights emails)
+Install:
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
+4️⃣ Initialize Flask App
+
+Create app.py
+
+Create templates/ and static/ folders.
+
+5️⃣ Set Up Basic Routes
+
+/ → Home
+
+/signup → User registration
+
+/login → User login
+
+/dashboard → Main user dashboard
+
+/upload → CSV upload page
+
+✅ 🔹 Phase 2: User Authentication
+1️⃣ Use Flask-Login for:
+
+Sign up
+
+Log in
+
+Log out
+
+Password hashing
+
+2️⃣ Create User table in SQLite (SQLAlchemy ORM):
+
+ID, username, email, password hash
+
+3️⃣ Build simple signup & login HTML pages.
+
+✅ 🔹 Phase 3: CSV Upload & Auto-Categorization
+1️⃣ Route: /upload
+
+Form to upload CSV.
+
+Save uploaded CSV to /uploads/.
+
+2️⃣ Use Pandas:
+
+Read CSV.
+
+Clean & parse data.
+
+Auto-categorize using saved ML model (categorizer.pkl).
+
+3️⃣ Store transactions in DB:
+
+Transaction table: ID, user_id, date, amount, description, category.
+
+✅ 🔹 Phase 4: Dashboard with Charts
+1️⃣ Route: /dashboard
+
+Read transactions for logged-in user.
+
+Aggregate totals by category & month.
+
+Pass data to Chart.js for:
+
+Income/Expense time-series chart.
+
+Category-wise spending chart.
+
+2️⃣ HTML: Use Bootstrap + Chart.js.
+
+✅ 🔹 Phase 5: Smart Insights
+1️⃣ Add backend logic in insights.py:
+
+Calculate top categories.
+
+Predict next month’s spending using simple regression (scikit-learn).
+
+Suggest saving tips.
+
+2️⃣ Display insights on dashboard:
+
+E.g., “Your groceries spending is up 20% from last month!”
+
+3️⃣ (Optional) Send weekly/monthly summary email using Flask-Mail.
+
+✅ 🔹 Phase 6: Goal Tracking
+1️⃣ Create Goal table:
+
+ID, user_id, goal_name, target_amount, saved_amount, target_date.
+
+2️⃣ Route: /goals
+
+Form to create a goal.
+
+Show existing goals.
+
+Update progress automatically based on income vs. expenses.
+
+3️⃣ Visualize progress with progress bars.
+
+✅ 🔹 Phase 7: Debt & Loan Manager
+1️⃣ Create Debt table:
+
+ID, user_id, debt_name, total_amount, interest_rate, min_payment, balance.
+
+2️⃣ Route: /debts
+
+Form to add debts.
+
+Show payoff timeline chart.
+
+Suggest payoff strategies (snowball/avalanche).
+
+✅ 🔹 Phase 8: Reports & Exports
+1️⃣ Route: /reports
+
+Choose date range.
+
+Export:
+
+Full transactions as CSV/Excel (pandas.to_csv).
+
+PDF summary report using ReportLab.
+
+2️⃣ Save generated files in /reports/.
+
+✅ 🔹 Phase 9: Gamify It
+1️⃣ Create Badge table:
+
+ID, user_id, badge_name, date_earned.
+
+2️⃣ Logic in badges.py:
+
+Rules like:
+
+“Saved 3 months in a row”
+
+“Kept spending under budget”
+
+“Reached 50% of goal”
+
+3️⃣ Display badges on /dashboard or /badges.
+
+4️⃣ Fun: Show motivational quotes or confetti 🎉!
+
+✅ 🔹 Phase 10: Polish & Deploy
+1️⃣ Add styling (Bootstrap or Tailwind).
+2️⃣ Make dashboard mobile responsive.
+3️⃣ Test for bugs.
+4️⃣ (Optional) Deploy on Render, PythonAnywhere, or Heroku.
+
+🗂️ ✅ Final Folder Recap
+plaintext
+Copy
+Edit
+financial_dashboard/
+├── app.py
+├── templates/
+│   ├── index.html
+│   ├── signup.html
+│   ├── login.html
+│   ├── dashboard.html
+│   ├── upload.html
+│   ├── goals.html
+│   ├── debts.html
+│   ├── reports.html
+│   ├── badges.html
+├── static/
+│   ├── css/
+│   ├── js/
+├── uploads/
+├── reports/
+├── models/
+│   ├── categorizer.pkl
+│   ├── insights.py
+│   ├── badges.py
+├── database.db
+├── requirements.txt
+├── README.md
