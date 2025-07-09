@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}Reports - Financial Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-6 fw-bold">
+            <i class="fas fa-file-alt me-2"></i>Financial Reports
+        </h1>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-download me-2"></i>Generate Report
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('generate_report') }}">
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">End Date</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="report_type" class="form-label">Report Type</label>
+                            <select class="form-select" id="report_type" name="report_type" required>
+                                <option value="">Select report type</option>
+                                <option value="csv">CSV Export</option>
+                                <option value="pdf">PDF Summary</option>
+                            </select>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-download me-2"></i>Generate Report
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Report Types
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="report-type-info">
+                        <h6><i class="fas fa-file-csv text-success me-2"></i>CSV Export</h6>
+                        <p>Download all your transactions in CSV format for external analysis or record keeping.</p>
+                        <ul>
+                            <li>All transaction details</li>
+                            <li>Easy to import into Excel or other tools</li>
+                            <li>Perfect for backup purposes</li>
+                        </ul>
+                        
+                        <h6><i class="fas fa-file-pdf text-danger me-2"></i>PDF Summary</h6>
+                        <p>Professional financial summary report with charts and analysis.</p>
+                        <ul>
+                            <li>Income and expense summary</li>
+                            <li>Category breakdowns</li>
+                            <li>Professional formatting</li>
+                            <li>Ready for sharing or printing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Report Features -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>Report Features
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="fas fa-calendar-alt feature-icon text-primary"></i>
+                                <h6>Custom Date Range</h6>
+                                <p>Select any date range for your reports, from daily to yearly summaries.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="fas fa-filter feature-icon text-success"></i>
+                                <h6>Smart Filtering</h6>
+                                <p>Reports include intelligent filtering and categorization of your data.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item text-center">
+                                <i class="fas fa-shield-alt feature-icon text-info"></i>
+                                <h6>Secure Export</h6>
+                                <p>All reports are generated securely and contain only your personal data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Report Tips -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>Report Tips
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-clock text-warning me-2"></i>Best Practices</h6>
+                            <ul>
+                                <li>Generate monthly reports for regular review</li>
+                                <li>Use quarterly reports for tax preparation</li>
+                                <li>Export CSV files for backup purposes</li>
+                                <li>Share PDF summaries with financial advisors</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-chart-line text-success me-2"></i>Analysis Tips</h6>
+                            <ul>
+                                <li>Compare reports from different periods</li>
+                                <li>Look for spending patterns and trends</li>
+                                <li>Use reports to identify areas for improvement</li>
+                                <li>Track progress toward financial goals</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Set default date range to last 30 days
+    document.addEventListener('DOMContentLoaded', function() {
+        const endDate = new Date();
+        const startDate = new Date();
+        startDate.setDate(endDate.getDate() - 30);
+        
+        document.getElementById('end_date').valueAsDate = endDate;
+        document.getElementById('start_date').valueAsDate = startDate;
+    });
+</script>
+{% endblock %}

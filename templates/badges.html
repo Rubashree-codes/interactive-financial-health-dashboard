@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Achievement Badges - Financial Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-6 fw-bold">
+            <i class="fas fa-trophy me-2"></i>Achievement Badges
+        </h1>
+        <div class="badge-stats">
+            <span class="badge bg-primary badge-lg">
+                {{ earned_badge_ids|length }} / {{ all_badges|length }} Earned
+            </span>
+        </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Overall Progress</h6>
+                        <span class="fw-bold">
+                            {{ "%.1f"|format((earned_badge_ids|length / all_badges|length) * 100) }}%
+                        </span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                             style="width: {{ (earned_badge_ids|length / all_badges|length) * 100 }}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Badges Grid -->
+    <div class="row g-4">
+        {% for badge in all_badges %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card badge-card h-100 {% if badge.id in earned_badge_ids %}earned{% else %}locked{% endif %}">
+                    <div class="card-body text-center">
+                        <div class="badge-icon-container mb-3">
+                            <div class="badge-icon">
+                                {{ badge.icon }}
+                            </div>
+                            {% if badge.id in earned_badge_ids %}
+                                <div class="badge-checkmark">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            {% else %}
+                                <div class="badge-lock">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <h6 class="card-title">{{ badge.name }}</h6>
+                        <p class="card-text text-muted">{{ badge.description }}</p>
+                        
+                        {% if badge.id in earned_badge_ids %}
+                            <span class="badge bg-success">
+                                <i class="fas fa-trophy me-1"></i>Earned
+                            </span>
+                        {% else %}
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-lock me-1"></i>Locked
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Badge Categories -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Badge Categories
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-star text-warning me-2"></i>Getting Started</h6>
+                            <ul>
+                                <li>First Transaction - Upload your first transaction</li>
+                                <li>Consistent Tracker - Track expenses daily</li>
+                                <li>Century Club - Record 100 transactions</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-bullseye text-primary me-2"></i>Goal Oriented</h6>
+                            <ul>
+                                <li>Goal Achiever - Complete your first goal</li>
+                                <li>Emergency Fund - Save 3 months of expenses</li>
+                                <li>Saver - Save consistently for 3 months</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-chart-line text-success me-2"></i>Financial Health</h6>
+                            <ul>
+                                <li>Budget Master - Control spending effectively</li>
+                                <li>Debt Slayer - Pay off any debt completely</li>
+                                <li>Categorization Pro - Diversify spending categories</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Motivation Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card motivation-card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        <i class="fas fa-rocket me-2"></i>Keep Going!
+                    </h5>
+                    <p class="card-text">
+                        Every badge represents a step forward in your financial journey. 
+                        Stay consistent, track your progress, and celebrate your achievements!
+                    </p>
+                    
+                    {% if earned_badge_ids|length == 0 %}
+                        <div class="mt-3">
+                            <a href="{{ url_for('upload') }}" class="btn btn-primary me-2">
+                                <i class="fas fa-upload me-1"></i>Upload Transactions
+                            </a>
+                            <a href="{{ url_for('goals') }}" class="btn btn-outline-primary">
+                                <i class="fas fa-bullseye me-1"></i>Set Goals
+                            </a>
+                        </div>
+                    {% elif earned_badge_ids|length < all_badges|length %}
+                        <div class="mt-3">
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                                <i class="fas fa-tachometer-alt me-1"></i>Continue Journey
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="mt-3">
+                            <h4 class="text-success">
+                                <i class="fas fa-trophy me-2"></i>Congratulations! You've earned all badges!
+                            </h4>
+                            <p>You're a financial management expert!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Add confetti effect for earned badges
+    document.addEventListener('DOMContentLoaded', function() {
+        const earnedBadges = document.querySelectorAll('.badge-card.earned');
+        
+        earnedBadges.forEach(badge => {
+            badge.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            badge.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    });
+</script>
+{% endblock %}

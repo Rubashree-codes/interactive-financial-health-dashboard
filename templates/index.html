@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %}Financial Dashboard - Home{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-80">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold text-white mb-4">
+                        Take Control of Your <span class="text-accent">Financial Future</span>
+                    </h1>
+                    <p class="lead text-white-75 mb-4">
+                        Track expenses, set goals, and gain insights into your financial health with our comprehensive dashboard. Start your journey to financial freedom today.
+                    </p>
+                    {% if not current_user.is_authenticated %}
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <a href="{{ url_for('signup') }}" class="btn btn-accent btn-lg me-md-2">
+                                <i class="fas fa-user-plus me-2"></i>Get Started Free
+                            </a>
+                            <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </a>
+                        </div>
+                    {% else %}
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-accent btn-lg">
+                            <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image text-center">
+                    <div class="hero-chart">
+                        <i class="fas fa-chart-line hero-icon"></i>
+                        <div class="floating-elements">
+                            <div class="floating-element floating-element-1">💰</div>
+                            <div class="floating-element floating-element-2">📊</div>
+                            <div class="floating-element floating-element-3">🎯</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Features Section -->
+    <div class="row text-center mb-5">
+        <div class="col-12">
+            <h2 class="display-5 fw-bold mb-4">Powerful Features for Smart Money Management</h2>
+            <p class="lead text-muted">Everything you need to take control of your finances in one place</p>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-upload feature-icon"></i>
+                    </div>
+                    <h5 class="card-title">Smart CSV Upload</h5>
+                    <p class="card-text">
+                        Upload your bank statements and transactions in CSV format for instant analysis and categorization.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-brain feature-icon"></i>
+                    </div>
+                    <h5 class="card-title">AI Categorization</h5>
+                    <p class="card-text">
+                        Automatically categorize your transactions using intelligent pattern recognition and machine learning.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-chart-pie feature-icon"></i>
+                    </div>
+                    <h5 class="card-title">Interactive Charts</h5>
+                    <p class="card-text">
+                        Visualize your spending patterns with beautiful, interactive charts and real-time analytics.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-lightbulb feature-icon"></i>
+                    </div>
+                    <h5 class="card-title">Smart Insights</h5>
+                    <p class="card-text">
+                        Get personalized insights and recommendations based on your spending habits and financial goals.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-bullseye feature-icon"></i>
+                    </div>
+                    <h5 class="card-title">Goal Tracking</h5>
+                    <p class="card-text">
+                        Set financial goals and track your progress with visual indicators and milestone celebrations.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-trophy feature-icon"></i>
+                    </div>
+                    <h5 class="card-title">Achievement System</h5>
+                    <p class="card-text">
+                        Earn badges and rewards for reaching milestones and maintaining good financial habits.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Statistics Section -->
+    <div class="row mt-5 py-5">
+        <div class="col-12">
+            <div class="stats-section">
+                <h2 class="display-5 fw-bold text-center mb-5">Why Choose FinanceDash?</h2>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="stat-item">
+                            <div class="stat-icon-wrapper">
+                                <i class="fas fa-shield-alt stat-icon"></i>
+                            </div>
+                            <h3 class="stat-number">100%</h3>
+                            <p class="stat-label">Secure & Private</p>
+                            <p class="stat-description">Your financial data is encrypted and stored securely</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="stat-item">
+                            <div class="stat-icon-wrapper">
+                                <i class="fas fa-mobile-alt stat-icon"></i>
+                            </div>
+                            <h3 class="stat-number">Responsive</h3>
+                            <p class="stat-label">Mobile Friendly</p>
+                            <p class="stat-description">Access your dashboard from any device, anywhere</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="stat-item">
+                            <div class="stat-icon-wrapper">
+                                <i class="fas fa-rocket stat-icon"></i>
+                            </div>
+                            <h3 class="stat-number">Fast</h3>
+                            <p class="stat-label">Lightning Speed</p>
+                            <p class="stat-description">Real-time updates and instant insights</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- How It Works Section -->
+    <div class="row mt-5 py-5">
+        <div class="col-12">
+            <h2 class="display-5 fw-bold text-center mb-5">How It Works</h2>
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h5>Sign Up</h5>
+                        <p>Create your free account in seconds</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h5>Upload Data</h5>
+                        <p>Import your transactions via CSV</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h5>Set Goals</h5>
+                        <p>Define your financial objectives</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <h5>Track Progress</h5>
+                        <p>Monitor your financial health</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA Section -->
+    {% if not current_user.is_authenticated %}
+    <div class="row mt-5 py-5">
+        <div class="col-12">
+            <div class="cta-section text-center">
+                <h2 class="display-5 fw-bold mb-4">Ready to Transform Your Financial Life?</h2>
+                <p class="lead mb-4">Join thousands of users who have already taken control of their finances with FinanceDash.</p>
+                <a href="{{ url_for('signup') }}" class="btn btn-accent btn-lg">
+                    <i class="fas fa-user-plus me-2"></i>Start Your Journey - It's Free!
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

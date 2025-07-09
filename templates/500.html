@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error - Financial Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="error-page text-center py-5">
+                <div class="error-icon mb-4">
+                    <i class="fas fa-exclamation-triangle fa-5x text-warning"></i>
+                </div>
+                <h1 class="display-1 fw-bold text-muted">500</h1>
+                <h2 class="mb-4">Internal Server Error</h2>
+                <p class="lead text-muted mb-4">
+                    Something went wrong on our end. We're working to fix this issue.
+                </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg me-md-2">
+                        <i class="fas fa-home me-2"></i>Go Home
+                    </a>
+                    <button onclick="window.location.reload()" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-redo me-2"></i>Try Again
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Error Details for Development -->
+    {% if config.DEBUG %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-warning">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bug me-2"></i>Debug Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <strong>Debug Mode:</strong> This information is only shown in development mode.
+                    </div>
+                    <p>An internal server error occurred. Check the application logs for more details.</p>
+                    <p><strong>Possible causes:</strong></p>
+                    <ul>
+                        <li>Database connection issues</li>
+                        <li>File upload problems</li>
+                        <li>Template rendering errors</li>
+                        <li>Missing dependencies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Helpful Actions -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-tools me-2"></i>What You Can Do
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-user me-2"></i>As a User</h6>
+                            <ul>
+                                <li>Try refreshing the page</li>
+                                <li>Go back to the previous page</li>
+                                <li>Check your internet connection</li>
+                                <li>Try again in a few minutes</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-code me-2"></i>As a Developer</h6>
+                            <ul>
+                                <li>Check the application logs</li>
+                                <li>Verify database connectivity</li>
+                                <li>Check file permissions</li>
+                                <li>Review recent code changes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
