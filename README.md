@@ -34,13 +34,13 @@ A comprehensive web-based personal finance management system built with Flask, f
 ## Screenshots
 
 ### Dashboard Overview
-![Dashboard](static/images/dashboard-preview.png)
+![Dashboard]("C:\Users\rubas\OneDrive\Pictures\Screenshots\Screenshot_14-10-2025_223052_127.0.0.1.jpeg")
 
 ### Goal Tracking
-![Goals](static/images/goals-preview.png)
+![Goals]("C:\Users\rubas\OneDrive\Pictures\Screenshots\Screenshot_14-10-2025_223133_127.0.0.1.jpeg")
 
 ### Debt Management
-![Debts](static/images/debts-preview.png)
+![Debts]("C:\Users\rubas\OneDrive\Pictures\Screenshots\Screenshot_14-10-2025_223152_127.0.0.1.jpeg")
 
 ## Tech Stack
 
